@@ -49,6 +49,8 @@ CREATE TABLE qna (
 	q_contetns	varchar2(200)		NULL,
 	q_a	varchar2(200)		NULL,
 	q_regdate	date	DEFAULT sysdate	NULL,
+	a_cnt number(5) NULL,
+	q_cnt number(5) NULL,
 	q_idx	number(5)		NULL,
      CONSTRAINT QNA_FK1 FOREIGN KEY (q_id)REFERENCES tbl_client(id) on DELETE CASCADE
 );
