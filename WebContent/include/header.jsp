@@ -20,10 +20,10 @@
 			<a class="navbar-brand" href="/etc">Method Shopping Page</a>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="index">홈
+					<li class="nav-item active"><a class="nav-link" href="index.jsp">홈
 							<span class="sr-only">(current)</span>							
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/join/login.jsp">로그인</a></li>
+					<li class="nav-item"><a class="nav-link" href="login.jsp">로그인</a></li>
 					<li class="nav-item"><a class="nav-link" href="/join/register.jsp">회원가입</a></li>
 				</ul>
 			</div>
