@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>메인 화면입니다</title>
+<title>MAIN</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/resource/css/bootstrap.css">
@@ -15,9 +15,6 @@
 </script>
 </head>
 <body>
-<hr>
-<hr>
-	
 	<div >
 			<section>
 				<div class="nav navbar-nav navbar-right">
@@ -27,8 +24,7 @@
         	 		  		    거쳐 취득하는 국가기술자격입니다<br> 
         					    산업현장 중심의 교육평가로 더 커지는 능력 ! <br> 알고 있는
       						    것에 할 수 있다는 것을 더하는<br> 과정평가형 자격은
-      					<br>  현장 중심형 인재육성을 지원합니다.<br>
-					<h2 align="center" class=""> JSL TeamProject - Method</h2><br>											
+      					<br>  현장 중심형 인재육성을 지원합니다.<br>										
 				</div>
 			</section>
 	</div>
