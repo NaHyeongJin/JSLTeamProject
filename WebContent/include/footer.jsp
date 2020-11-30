@@ -1,25 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/resource/css/bootstrap.css">
+	pageEncoding="UTF-8"%>
 
-</head>
-<body>
-<div class="card">
-  <div class="card-body">
-    <footer class="blockquote-footer">
-      <p>º Team Method - shopping enjoy All rights reserve.<br>
-			A_chi up hago sip da Company Development Serivce of Korea</p>
-      </footer>
-  </div>
 </div>
+<!-- /.col-lg-9 -->
 
-<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
-</body>
+
+</div>
+<!-- /.row -->
+
+</div>
+<!-- /.container -->
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center text-white">Team Method - shopping enjoy All rights reserve.<br>
+			Company Development Serivce of Korea</p>
+	</div>
+	<!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 </html>

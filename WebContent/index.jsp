@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>  
 <%@ include file="/include/header.jsp" %>
 
 <!DOCTYPE html>
@@ -16,9 +15,6 @@
 </script>
 </head>
 <body>
-<hr>
-<hr>
-	
 	<div >
 			<section>
 				<div class="nav navbar-nav navbar-right">
@@ -28,8 +24,7 @@
         	 		  		    거쳐 취득하는 국가기술자격입니다<br> 
         					    산업현장 중심의 교육평가로 더 커지는 능력 ! <br> 알고 있는
       						    것에 할 수 있다는 것을 더하는<br> 과정평가형 자격은
-      					<br>  현장 중심형 인재육성을 지원합니다.<br>
-					<h2 align="center" class=""> JSL TeamProject - Method</h2><br>											
+      					<br>  현장 중심형 인재육성을 지원합니다.<br>										
 				</div>
 			</section>
 	</div>
