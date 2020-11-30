@@ -41,16 +41,17 @@ public class QnABoardServlet extends HttpServlet {
 		vo.setQ_subject("질문1");
 		vo.setQ_cnt(0);
 		list.add(vo);
+		vo = new QnaVO();
 		vo.setGrade("a");
 		vo.setId("admin");
 		vo.setQ_idx(1);
 		vo.setPw("12");
-		vo.setQ_subject("질문1");
+		vo.setQ_subject("질문1 답변");
 		vo.setA_cnt(0);
 		list.add(vo);
 		request.setAttribute("list", list);
 		request.setAttribute("pageIndex", 5);
-		request.setAttribute("newIdx", list.get(0).getIdx());
+		request.setAttribute("newIdx", 0);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
 		dispatcher.forward(request, response);
 	}

@@ -30,15 +30,24 @@
 	</nav>
 	<!-- Page Content -->
 	<div class="container">
-	<div class="row">
-<nav class="navbar navbar-expand-lg navbar-light">
+		<div class="row">
 
-  <form class="form-inline">
-    <button class="btn btn-outline-success" type="button" style="margin-right: 10px; margin-top: 10px;" onclick="location.href='index'"> 자유게시판</button>
-    <button class="btn btn-outline-success" type="button" style="margin-right: 10px; margin-top: 10px;" onclick="location.href='qna_board'"> 질문과답변</button>
-    <button class="btn btn-outline-success" type="button" style="margin-right: 10px; margin-top: 10px;" onclick="location.href='index'"> 자료실(다운로드)</button>
-    <button class="btn btn-outline-success" type="button" style="margin-right: 10px; margin-top: 10px;" onclick="location.href='index'"> 쇼핑몰 </button>
-  </form>
-</nav>
-  </div>
-  </div>
+			<div class="col-lg-3">
+
+				<h3 class="my-4 text-center">Category</h3>
+				<div class="list-group mb-4">
+					<a class="list-group-item list-group-item-info text-center font-weight-bold" href="index">자유게시판</a>
+					<a href="qna_board"
+						class="list-group-item list-group-item-action text-center font-weight-bold">질문과 답변</a>
+					<a href="index"
+						class="list-group-item list-group-item-action text-center font-weight-bold">자료실(다운로드)</a>
+					<a href="index"
+						class="list-group-item list-group-item-action text-center font-weight-bold">쇼핑몰</a>
+					<a href="index"
+						class="list-group-item list-group-item-action text-center font-weight-bold">공지사항</a>
+				</div>
+
+			</div>
+			<!-- /.col-lg-3 -->
+
+			<div class="col-lg-9 my-4 mb-4">
