@@ -8,7 +8,15 @@ public class QnaVO {//질문과답변 게시판
 	private String q_contents;//질문 내용
 	private String q_regdate;//자유게시판 글등록날짜
 	private String q_a;//질문글의 답변
-	private int idx;//글 번호
+	private int q_idx;//글 번호
+	private int a_cnt;//글 조회수
+	private int q_cnt;//답글 조회수
+	public int getQ_cnt() {
+		return q_cnt;
+	}
+	public void setQ_cnt(int q_cnt) {
+		this.q_cnt = q_cnt;
+	}
 	public String getId() {
 		return id;
 	}
@@ -51,11 +59,17 @@ public class QnaVO {//질문과답변 게시판
 	public void setQ_a(String q_a) {
 		this.q_a = q_a;
 	}
-	public int getIdx() {
-		return idx;
+	public int getQ_idx() {
+		return q_idx;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setQ_idx(int q_idx) {
+		this.q_idx = q_idx;
+	}
+	public int getA_cnt() {
+		return a_cnt;
+	}
+	public void setA_cnt(int a_cnt) {
+		this.a_cnt = a_cnt;
 	}
 	
 }
