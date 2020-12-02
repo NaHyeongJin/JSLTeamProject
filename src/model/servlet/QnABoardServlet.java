@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.QnABoardDAO;
 import model.vo.QnaVO;
 
 /**
@@ -32,26 +33,18 @@ public class QnABoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<QnaVO> list = new ArrayList<QnaVO>();
-		QnaVO vo = new QnaVO();
-		vo.setGrade("a");
-		vo.setId("na");
-		vo.setQ_idx(1);
-		vo.setPw("12");
-		vo.setQ_subject("질문1");
-		vo.setQ_cnt(0);
-		list.add(vo);
-		vo = new QnaVO();
-		vo.setGrade("a");
-		vo.setId("admin");
-		vo.setQ_idx(1);
-		vo.setPw("12");
-		vo.setQ_subject("질문1 답변");
-		vo.setA_cnt(0);
-		list.add(vo);
+		QnABoardDAO manager = QnABoardDAO.getInstance();
+		List<QnaVO> list = manager.qnaList();
+		int cnt = manager.totList() - 1;
+		
+		if(list.size() > 10)
+			cnt = (list.get(10).getId().contains("admin")) ? cnt - 1 : cnt;
+		cnt = (int) (cnt / 10) + 1;
+		
 		request.setAttribute("list", list);
-		request.setAttribute("pageIndex", 5);
+		request.setAttribute("pageIndex", cnt);
 		request.setAttribute("newIdx", 0);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
 		dispatcher.forward(request, response);
 	}

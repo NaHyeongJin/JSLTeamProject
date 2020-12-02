@@ -13,8 +13,8 @@
 <title>답변 게시판</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/resource/css/bootstrap.css">
+<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="resource/css/bootstrap.css">
 <script>
 	
 </script>
@@ -30,12 +30,17 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:if test="${empty list}">
+				<tr>
+					<td colspan="4" class="text-center">작성된 글이 없습니다.</td>
+				</tr>
+			</c:if>
 			<c:forEach var="list" items="${list}">
 				<c:choose>
 					<c:when test="${newIdx != list.q_idx }">
 						<input type="hidden" ${newIdx = list.q_idx }>
 						<tr>
-							<td style="width: 60%"><a class="text-reset" href="#">
+							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}">
 									${list.q_subject } </a></td>
 							<td style="width: 10%" class="text-center">${(fn:contains(list.id, 'admin')) ? '관리자' : list.id }</td>
 							<td style="width: 20%" class="text-center">${list.q_regdate }</td>
@@ -44,8 +49,8 @@
 					</c:when>
 					<c:otherwise>
 						<tr>
-							<td style="width: 60%"><a class="text-reset" href="#"> └
-									re: ${list.q_subject } </a></td>
+							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}">
+							 └re: ${list.q_subject } </a></td>
 							<td style="width: 10%" class="text-center">${(fn:contains(list.id, 'admin')) ? '관리자' : list.id }</td>
 							<td style="width: 20%" class="text-center">${list.q_regdate }</td>
 							<td style="width: 10%" class="text-center">${list.a_cnt }</td>
@@ -70,18 +75,22 @@
 	</nav>
 	<nav class="navbar navbar-light bg-light">
 		<form action="/board/boardWriter" method="post">
-			<input type="hidden" name="bdGroup" value="-1"> <input
-				type="hidden" name="bdOrder" value="0"> <input type="hidden"
-				name="bdIndent" value="0">
-			<button type="submit" class="btn btn-secondary mb-3">새글쓰기</button>
+			<button type="button" class="btn btn-secondary mb-3"
+				onClick="location.href='qna_write'">새글쓰기</button>
 		</form>
 		<form class="form-inline">
+			<select id="inputSearch" class="form-control">
+				<option selected>제목</option>
+				<option>내용</option>
+				<option>작성자</option>
+			</select>
 			<input class="form-control mr-sm-2" type="search"
 				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			<button class="btn btn-outline-success my-2 my-sm-0" type="button"
+				onClick="location.href='#'">Search</button>
 		</form>
 	</nav>
-	<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
+	<script type="text/javascript" src="resource/js/bootstrap.js"></script>
 </body>
 <%@ include file="/include/footer.jsp"%>
 </html>
