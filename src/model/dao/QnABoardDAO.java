@@ -182,4 +182,99 @@ public class QnABoardDAO {
 		}
 		return vo;
 	}
+
+	public void editQna(String subject, String content, int idx, Boolean isAnswer) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String temp = (isAnswer) ? "Q_A" : "Q_CONTENT";
+		String sql = "UPDATE QNA SET Q_SUBJECT = ?, " + temp + " = ? where q_idx=?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  subject);
+			pstmt.setString(2,  content);
+			pstmt.setInt(3, idx);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	public void deleteQna(int idx, Boolean isAnswer) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String temp = (isAnswer) ? "Q_A" : "Q_CONTENT";
+		String sql = "DELETE FROM QNA WHERE q_idx=? and " + temp + " is null";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
+	
+	public String getTitle(int idx) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String answer = "";
+		String sql = "select q_subject from qna where idx=?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			answer = (rs.next()) ? rs.getString("q_subject") : "";
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+		return answer;
+	}
+
+	public void qnaRewrite(int idx, String subject, String content) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "INSERT INTO QNA(Q_ID, Q_SUBJECT, Q_A, A_CNT, Q_IDX, Q_GRADE) VALUES ('admin', ?, ?, 0, ?, 'A')";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, subject);
+			pstmt.setString(2, content);
+			pstmt.setInt(3, idx);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+	}
 }

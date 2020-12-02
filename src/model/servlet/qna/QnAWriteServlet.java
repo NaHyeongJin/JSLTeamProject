@@ -1,4 +1,4 @@
-package model.servlet;
+package model.servlet.qna;
 
 import java.io.IOException;
 import java.util.logging.Logger;

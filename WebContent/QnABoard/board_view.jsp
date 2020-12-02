@@ -47,14 +47,14 @@
 </div>
 <nav class="navbar navbar-expand-lg">
 	<c:if test="${!isAnswer && (fn:contains(cookie.id, 'admin'))}">
-  		<form action="답글쓰러가깅ㅇㅇㅇㅇ" method="post">
+  		<form action="qna_rewrite?idx=${vo.q_idx }" method="get">
 			<button type="submit" class="btn btn-secondary mr-sm-2">답글쓰기</button>
 		</form>
 	</c:if>
-  		<form action="수정하러가깅ㅇㅇㅇㅇ" method="post">
+  		<form action="qna_edit?idx=${vo.q_idx }&isAnswer=${isAnswer}" method="get">
 			<button type="submit" class="btn btn-secondary mr-sm-2">수정하기</button>
 		</form>
-    	<form action="삭제하러가깅ㅇㅇㅇㅇㅇㅇ" method="post">
+    	<form action="qna_delete?idx=${vo.q_idx }&isAnswer=${isAnswer}" method="get">
 			<button type="submit" class="btn btn-secondary mr-sm-2">삭제하기</button>
 		</form>
 </nav>
