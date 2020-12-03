@@ -1,6 +1,7 @@
-package servlet;
+package model.servlet;
 
 import java.io.IOException;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ProjectDAO;
-import vo.LoginVO;
+import model.dao.ProjectDAO;
+import model.vo.LoginVO;
 
 
 @WebServlet("/login.do")

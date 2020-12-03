@@ -1,6 +1,7 @@
-package dao;
+package model.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import vo.ClientVO;
-import vo.LoginVO;
+import model.vo.ClientVO;
+import model.vo.LoginVO;
 
 
 public class ProjectDAO {//여기서 DB 작업 하겠습니다
