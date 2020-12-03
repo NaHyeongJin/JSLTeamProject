@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,11 +21,33 @@
 			<a class="navbar-brand" href="index">Method Shopping Page</a>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="index">홈
-							<span class="sr-only">(current)</span>							
+					<li class="nav-item active"><a class="nav-link"
+						href="index">홈 <span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="/join/login.jsp">로그인</a></li>
-					<li class="nav-item"><a class="nav-link" href="/join/register.jsp">회원가입</a></li>
+
+					<!-- 관리자 로그인  -->
+					<c:if test="${Grade == 'A'}">
+						<li class="nav-item"><a class="nav-link"
+							href="LogoutServlet.do"> 로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/join/register.jsp">내정보가기</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/join/register.jsp">회원목록리스트</a></li>
+					</c:if>
+					<!-- 회원 로그인  -->
+					<c:if test="${Grade == 'B'}">
+						<li class="nav-item"><a class="nav-link"
+							href="LogoutServlet.do">로그아웃</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/join/register.jsp">내정보가기</a></li>
+					</c:if>
+					<!-- 비회원 로그인 -->
+					<c:if test="${empty loginedMemberId}">
+						<li class="nav-item"><a class="nav-link" href="login.do">로그인</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="/join/register.jsp">회원가입</a></li>
+					</c:if>
+
 				</ul>
 			</div>
 		</div>

@@ -43,11 +43,11 @@ function send() {
 						<input type="hidden" ${newIdx = list.q_idx }>
 						<input type="hidden" ${id = list.id}>
 						<tr>
-						<c:if test="${cookie.id == list.id || (fn:contains(cookie.id, 'admin'))}">
+						<c:if test="${loginedMemberId == list.id || (fn:contains(loginedMemberId, 'admin'))}">
  							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=false&page=${page}">
 									${list.q_subject } </a></td>
 						</c:if>
-						<c:if test="${!(cookie.id == list.id || (fn:contains(cookie.id, 'admin')))}">
+						<c:if test="${!(loginedMemberId == list.id || (fn:contains(loginedMemberId, 'admin')))}">
  							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=true&page=${page}">
 									${list.q_subject } </a></td>
 						</c:if>
@@ -57,11 +57,11 @@ function send() {
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<c:if test="${cookie.id == id || (fn:contains(cookie.id, 'admin'))}">
+						<c:if test="${loginedMemberId == id || (fn:contains(loginedMemberId, 'admin'))}">
  							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=false&page=${page}">
 								└re: ${list.q_subject } </a></td>
 						</c:if>
-						<c:if test="${!(cookie.id == id || (fn:contains(cookie.id, 'admin')))}">
+						<c:if test="${!(loginedMemberId == id || (fn:contains(loginedMemberId, 'admin')))}">
  							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=true&page=${page}">
 								└re: ${list.q_subject } </a></td>
 						</c:if>
@@ -88,10 +88,12 @@ function send() {
 		</ul>
 	</nav>
 	<nav class="navbar navbar-light bg-light">
-		<form action="/board/boardWriter" method="post">
-			<button type="button" class="btn btn-secondary mb-3"
-				onClick="location.href='qna_write'">새글쓰기</button>
-		</form>
+		<c:if test="${!fn:contains(loginedMemberId, 'admin')}">
+			<form action="/board/boardWriter" method="post">
+				<button type="button" class="btn btn-secondary mb-3"
+					onClick="location.href='qna_write'">새글쓰기</button>
+			</form>
+		</c:if>
 		<form name = "search" class="form-inline" action="qna_board?page=1" method="post">
 			<select name="inputSearch" class="form-control">
 				<option selected>제목</option>

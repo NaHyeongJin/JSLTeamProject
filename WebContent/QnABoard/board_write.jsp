@@ -12,7 +12,6 @@
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 <script>
-
 </script>
 </head>
 <body>
@@ -20,7 +19,7 @@
 	<input type="text" name="qnaTitle" class="form-control mt-4 mb-2"
 		placeholder="제목을 입력해주세요." required
 	>
-	<c:if test = "${!isLoginned}">
+	<c:if test = "${loginedMemberId == null}">
 		<input type="text" name="qnaId" class="form-control"
 			placeholder="아이디를 입력해주세요." required
 		>

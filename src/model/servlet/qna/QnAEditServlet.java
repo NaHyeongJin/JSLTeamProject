@@ -30,6 +30,7 @@ public class QnAEditServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		Boolean isAnswer = request.getParameter("isAnswer").equals("true") ? true : false;
@@ -43,6 +44,7 @@ public class QnAEditServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		String subject = request.getParameter("qnaTitle");
 		String content = request.getParameter("qnaContent");

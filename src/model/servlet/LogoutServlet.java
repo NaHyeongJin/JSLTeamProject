@@ -28,7 +28,7 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("loginedMemberId");
 		session.removeAttribute("Grade");
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/LoginOut/delete_pro.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/Login/delete_pro.jsp");
 		rd.forward(request, response);
 
 	}

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.filters.SetCharacterEncodingFilter;
 
@@ -47,11 +48,12 @@ public class QnAWriteServlet extends HttpServlet {
 		// 로그인 된 토큰 기반으로 저장하거나
 		// 비회원이면 아이디 비번 받아서 저장
 		// 로그인 된 상태인지 확인하는 bool값 호출하고
+		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
-		Boolean isLoginned = false;
-		String id = (isLoginned) ? "" : (String) request.getParameter("qnaId"); // 가운데 ""는 쿠키.아이디
-		String pass = (isLoginned) ? "" : (String) request.getParameter("qnaPass"); // 가운데 ""는 쿠키.비밀번호
-		String grade = (isLoginned) ? ((false) ? "A" : "B") : "C"; // 가운데 false는 쿠키.아이디.contains("admin")
+		Boolean isLoginned = session.getAttribute("loginedMemberId").equals(null) ? false : true;
+		String id = (isLoginned) ? (String) session.getAttribute("loginedMemberId") : (String) request.getParameter("qnaId");
+		String pass = (isLoginned) ? "" : (String) request.getParameter("qnaPass");
+		String grade = (isLoginned) ? (String) session.getAttribute("Grade") : "C";
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		manager.qnaWrite(id, pass, (String) request.getParameter("qnaTitle"), (String) request.getParameter("qnaContent"), grade);
 		
