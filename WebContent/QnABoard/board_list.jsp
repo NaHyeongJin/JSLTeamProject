@@ -56,7 +56,7 @@ function send() {
 							<td style="width: 10%" class="text-center">${list.q_cnt }</td>
 						</tr>
 					</c:when>
-					<c:otherwise
+					<c:otherwise>
 						<c:if test="${loginedMemberId == id || (fn:contains(loginedMemberId, 'admin'))}">
  							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=false&page=${page}">
 								└re: ${list.q_subject } </a></td>
