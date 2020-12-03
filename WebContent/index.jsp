@@ -33,5 +33,5 @@
 	
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 </body>
-<%@ include file="/include/footer.jsp" %> 	
+<%@ include file="/include/footer.jsp" %>    
 </html>
