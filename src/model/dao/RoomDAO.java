@@ -382,18 +382,18 @@ public class RoomDAO {// 여기서 DB 작업 하겠습니다
 	}
 
 	// 삭제(delete)
-	public int RoomDelete(int idx, String r_pass) {
+	public int RoomDelete(int idx, String r_pw) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		// 리턴타입
 		int row = 0;
 		// 쿼리
-		String sql = "delete from room where r_idx=? and r_pass=?";
+		String sql = "delete from room where r_idx=? and r_pw=?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(2, r_pass);
+			pstmt.setString(2, r_pw);
 
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
