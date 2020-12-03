@@ -34,7 +34,8 @@ public class QnABoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		QnABoardDAO manager = QnABoardDAO.getInstance();
-		List<QnaVO> list = manager.qnaList();
+		int pageIndex = Integer.parseInt(request.getParameter("page"));
+		List<QnaVO> list = manager.qnaList(pageIndex);
 		int cnt = manager.totList() - 1;
 		
 		if(list.size() > 10)
@@ -44,6 +45,7 @@ public class QnABoardServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("pageIndex", cnt);
 		request.setAttribute("newIdx", 0);
+		request.setAttribute("id", "");
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
 		dispatcher.forward(request, response);

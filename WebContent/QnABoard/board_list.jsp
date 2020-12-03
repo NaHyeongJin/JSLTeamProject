@@ -16,7 +16,6 @@
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 <script>
-	
 </script>
 </head>
 <body>
@@ -39,18 +38,30 @@
 				<c:choose>
 					<c:when test="${newIdx != list.q_idx }">
 						<input type="hidden" ${newIdx = list.q_idx }>
+						<input type="hidden" ${id = list.id}>
 						<tr>
-							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}">
+						<c:if test="${cookie.id == list.id || (fn:contains(cookie.id, 'admin'))}">
+ 							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=false&page=${page}">
 									${list.q_subject } </a></td>
+						</c:if>
+						<c:if test="${!(cookie.id == list.id || (fn:contains(cookie.id, 'admin')))}">
+ 							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=true&page=${page}">
+									${list.q_subject } </a></td>
+						</c:if>
 							<td style="width: 10%" class="text-center">${(fn:contains(list.id, 'admin')) ? '관리자' : list.id }</td>
 							<td style="width: 20%" class="text-center">${list.q_regdate }</td>
 							<td style="width: 10%" class="text-center">${list.q_cnt }</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
-						<tr>
-							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}">
-							 └re: ${list.q_subject } </a></td>
+						<c:if test="${cookie.id == id || (fn:contains(cookie.id, 'admin'))}">
+ 							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=false&page=${page}">
+								└re: ${list.q_subject } </a></td>
+						</c:if>
+						<c:if test="${!(cookie.id == id || (fn:contains(cookie.id, 'admin')))}">
+ 							<td style="width: 60%"><a class="text-reset" href="qna_view?idx=${list.q_idx}&isAnswer=${fn:contains(list.id, 'admin')}&passCheck=true&page=${page}">
+								└re: ${list.q_subject } </a></td>
+						</c:if>
 							<td style="width: 10%" class="text-center">${(fn:contains(list.id, 'admin')) ? '관리자' : list.id }</td>
 							<td style="width: 20%" class="text-center">${list.q_regdate }</td>
 							<td style="width: 10%" class="text-center">${list.a_cnt }</td>
@@ -66,7 +77,7 @@
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<c:forEach var="a" begin="1" end="${pageIndex }" step="1">
-				<li class="page-item"><a class="page-link" href="#">${a}</a></li>
+				<li class="page-item"><a class="page-link" href="qna_board?page=${a}">${a}</a></li>
 			</c:forEach>
 			<li class="page-item"><a class="page-link" href="#"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>

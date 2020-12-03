@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 alert("삭제성공");
-location.href="qna_board";
+location.href="qna_board?page=1";
 </script>

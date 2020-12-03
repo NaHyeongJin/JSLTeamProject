@@ -37,7 +37,7 @@
 				<h3 class="my-4 text-center">Category</h3>
 				<div class="list-group mb-4">
 					<a class="list-group-item list-group-item-info text-center font-weight-bold" href="index">자유게시판</a>
-					<a href="qna_board"
+					<a href="qna_board?page=1"
 						class="list-group-item list-group-item-action text-center font-weight-bold">질문과 답변</a>
 					<a href="index"
 						class="list-group-item list-group-item-action text-center font-weight-bold">자료실(다운로드)</a>

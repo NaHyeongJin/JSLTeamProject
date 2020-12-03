@@ -31,24 +31,42 @@ public class QnAViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idx = Integer.parseInt(request.getParameter("idx"));
+		Boolean passCheck = (request.getParameter("passCheck").equals("true")) ? true : false;
 		Boolean isAnswer = (request.getParameter("isAnswer").equals("true")) ? true : false;
-		QnABoardDAO manager = QnABoardDAO.getInstance();
-		
-		manager.qnaHits(idx, isAnswer);
-		request.setAttribute("vo", manager.qnaView(idx, isAnswer));
 		request.setAttribute("isAnswer", request.getParameter("isAnswer"));
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_view.jsp");
-		dispatcher.forward(request, response);
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		request.setAttribute("idx", idx);
+		if(!passCheck) {
+			QnABoardDAO manager = QnABoardDAO.getInstance();
+			
+			manager.qnaHits(idx, isAnswer);
+			request.setAttribute("vo", manager.qnaView(idx, isAnswer));
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_view.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_pass_check.jsp");
+			dispatcher.forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Boolean bool = false;
+		QnABoardDAO manager = QnABoardDAO.getInstance();
+		int idx = Integer.parseInt(request.getParameter("idx"));
+		String pass = request.getParameter("pass");
+		Boolean isAnswer = (request.getParameter("isAnswer").equals("true")) ? true : false;
+		
+		bool = manager.passCheck(idx, pass);
+		request.setAttribute("bool", bool);
+		request.setAttribute("idx", idx);
+		request.setAttribute("isAnswer", isAnswer);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_view_pro.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

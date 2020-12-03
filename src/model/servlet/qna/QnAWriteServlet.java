@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.filters.SetCharacterEncodingFilter;
+
 import model.dao.QnABoardDAO;
 
 /**
@@ -45,6 +47,7 @@ public class QnAWriteServlet extends HttpServlet {
 		// 로그인 된 토큰 기반으로 저장하거나
 		// 비회원이면 아이디 비번 받아서 저장
 		// 로그인 된 상태인지 확인하는 bool값 호출하고
+		request.setCharacterEncoding("UTF-8");
 		Boolean isLoginned = false;
 		String id = (isLoginned) ? "" : (String) request.getParameter("qnaId"); // 가운데 ""는 쿠키.아이디
 		String pass = (isLoginned) ? "" : (String) request.getParameter("qnaPass"); // 가운데 ""는 쿠키.비밀번호
@@ -52,7 +55,7 @@ public class QnAWriteServlet extends HttpServlet {
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		manager.qnaWrite(id, pass, (String) request.getParameter("qnaTitle"), (String) request.getParameter("qnaContent"), grade);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("qna_board");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("qna_board?page=1");
 		dispatcher.forward(request, response);
 	}
 

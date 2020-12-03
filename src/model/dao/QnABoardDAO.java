@@ -25,17 +25,27 @@ public class QnABoardDAO {
 		return instance;
 	}
 
-	public List<QnaVO> qnaList() {
+	public List<QnaVO> qnaList(int pageIndex) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		List<QnaVO> qlist = new ArrayList<QnaVO>();
 
-		String sql = "select * from qna order by q_idx desc, q_regdate";
+		int first = (pageIndex - 1) * 10 + 1;
+		if(isAnswer(first)) {
+			first++;
+		}
+		int end = first + 9;
+		if(isAnswer(end + 1)) {
+			end++;
+		}
+		String sql = "SELECT * FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM QNA ORDER BY Q_IDX desc, Q_REGDATE) A) where rnum >= ? and rnum <= ?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  first);
+			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				QnaVO vo = new QnaVO();
@@ -63,6 +73,34 @@ public class QnABoardDAO {
 		}
 
 		return qlist;
+	}
+	
+	private Boolean isAnswer(int check) {
+		Boolean bool = false;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "SELECT q_id FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM QNA ORDER BY Q_IDX DESC, Q_REGDATE) A) where rnum=?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  check);
+			rs = pstmt.executeQuery();
+
+			bool = (rs.next()) ? rs.getString("q_id").contains("admin") : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+			}
+		}
+
+		return bool;
 	}
 
 	public int totList() {
@@ -211,8 +249,8 @@ public class QnABoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String temp = (isAnswer) ? "Q_CONTENTS" : "Q_A";
-		String sql = "DELETE FROM QNA WHERE q_idx=? and " + temp + " is null";
+		String temp = (isAnswer) ? "and Q_CONTENTS is null" : "";
+		String sql = "DELETE FROM QNA WHERE q_idx=? " + temp;
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -276,5 +314,30 @@ public class QnABoardDAO {
 			} catch (Exception e2) {
 			}
 		}
+	}
+
+	public Boolean passCheck(int idx, String pass) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select q_pw from qna where q_idx=? and q_grade='C'";
+		Boolean bool = false;
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+			bool = (rs.next()) ? rs.getString("q_pw").equals(pass) : false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				conn.close();
+				pstmt.close();
+			} catch (Exception e2) {
+			}
+		}
+		return bool;
 	}
 }

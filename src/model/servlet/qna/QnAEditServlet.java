@@ -50,7 +50,7 @@ public class QnAEditServlet extends HttpServlet {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		manager.editQna(subject, content, idx, isAnswer);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_edit_pro.jsp");
 		dispatcher.forward(request, response);
 	}
 
