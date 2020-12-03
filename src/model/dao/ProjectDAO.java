@@ -1,14 +1,19 @@
 package model.dao;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import model.vo.*;
+import model.vo.ClientVO;
+import model.vo.LoginVO;
 
 
 public class ProjectDAO {//여기서 DB 작업 하겠습니다
@@ -22,41 +27,88 @@ public class ProjectDAO {//여기서 DB 작업 하겠습니다
 		return instance;
 	}
 	//커넥션 풀 설정
-	private static Connection getConnection() throws Exception{
+	public static Connection getConnection() throws Exception {
 		Context initContext = new InitialContext();
 		Context envContext  = (Context)initContext.lookup("java:/comp/env");
 		DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
 		Connection conn = ds.getConnection();
+		//etc.
 		return conn;
+	
 	}
-	//회원회원가입
-	public int ClientWrite() {
-		int row =0;
-		String query="";
-		return row;
+
+	//로그인 메소드
+	public LoginVO login (String id, String pw) {
+		String query = "select pw,grade from tbl_client where id=? ";
+		LoginVO lvo =null;
+		log.info("id="+id);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				lvo = new LoginVO();
+				lvo.setPw( rs.getString("pw"));
+				lvo.setGrade( rs.getString("grade"));
+				if(lvo.getPw().equals(pw)) {
+					lvo.setRow(1);
+				}else {
+					lvo.setRow(0);
+				}
+			}else {
+				lvo.setRow(-1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lvo;
+		
 	}
-	//자유게시판 목록리스트
-	public List<BoardVO> BoardList(){
-		List<BoardVO> Blist = new ArrayList<BoardVO>();
-		String query="";
-		return Blist;
+	// 등급 반환 메소드
+	
+	// 등급 반환 메소드
+	public String grade (String id) {
+		String query = "select grade from tbl_client where id=? ";
+		String grade = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+			grade = rs.getString("grade");
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		}try {
+
+			rs.close();
+			pstmt.close();
+			conn.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return grade;
+		
+	
 	}
-	//공지사항 목록리스트
-	public List<NoticeVO> NoticeList(){
-		List<NoticeVO> Nlist = new ArrayList<NoticeVO>();
-		String query="";
-		return Nlist;
-	}
-	//자료실 목록리스트
-	public List<RoomVO> RoomList(){
-		List<RoomVO> Rlist = new ArrayList<RoomVO>();
-		String query="";
-		return Rlist;
-	}
-	//질문답변 목록리스트
-	public List<QnaVO> QnaList(){
-		List<QnaVO> Qlist = new ArrayList<QnaVO>();
-		String query="";
-		return Qlist;
-	}
+	
+	
 }
+
