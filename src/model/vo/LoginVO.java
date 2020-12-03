@@ -3,7 +3,7 @@ package model.vo;
 public class LoginVO {
 	private String id,pw,grade;
 	private int row ;
-	
+
 	public int getRow() {
 		return row;
 	}
@@ -11,6 +11,7 @@ public class LoginVO {
 	public void setRow(int row) {
 		this.row = row;
 	}
+
 
 	public String getId() {
 		return id;

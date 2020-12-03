@@ -1,25 +1,25 @@
 package model.vo;
 
 public class RoomVO {//자료실
-	private String r_id;//자료실 등록한 회원의 id
-	private String r_grade;//글쓴 사람의 등급
+	private String id;//자료실 등록한 회원의 id
+	private String grade;//글쓴 사람의 등급
 	private String r_subject;//자료실 제목
 	private String r_contents;//자료실 내용
 	private String r_regdate;//자료실 글등록날짜
 	private String r_filename;//자료실에등록된 파일이름
 	private int r_cnt;//글 조회수
-	private int r_idx;//글 번호
-	public String getR_id() {
-		return r_id;
+	private int idx;//글 번호
+	public String getId() {
+		return id;
 	}
-	public void setR_id(String r_id) {
-		this.r_id = r_id;
+	public void setId(String id) {
+		this.id = id;
 	}
-	public String getR_grade() {
-		return r_grade;
+	public String getGrade() {
+		return grade;
 	}
-	public void setR_grade(String r_grade) {
-		this.r_grade = r_grade;
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	public String getR_subject() {
 		return r_subject;
@@ -51,10 +51,11 @@ public class RoomVO {//자료실
 	public void setR_cnt(int r_cnt) {
 		this.r_cnt = r_cnt;
 	}
-	public int getR_idx() {
-		return r_idx;
+	public int getIdx() {
+		return idx;
 	}
-	public void setR_idx(int r_idx) {
-		this.r_idx = r_idx;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
+	
 }
