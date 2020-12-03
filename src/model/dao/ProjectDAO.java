@@ -1,3 +1,4 @@
+
 package model.dao;
 
 import java.sql.*;
@@ -9,6 +10,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import model.vo.*;
+import util.DBUtil;
 
 
 public class ProjectDAO {//여기서 DB 작업 하겠습니다
@@ -21,20 +23,43 @@ public class ProjectDAO {//여기서 DB 작업 하겠습니다
 	public static ProjectDAO getInstance () {//싱글톤
 		return instance;
 	}
-	//커넥션 풀 설정
-	private static Connection getConnection() throws Exception{
-		Context initContext = new InitialContext();
-		Context envContext  = (Context)initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle");
-		Connection conn = ds.getConnection();
-		return conn;
-	}
-	//회원회원가입
-	public int ClientWrite() {
-		int row =0;
-		String query="";
+	
+	//회원가입
+	
+	public int ClientWrite(ClientVO client) {
+		
+		int row = 0;
+		String query="INSERT INTO TBL_CLIENT(id,pw,name,email,email2,tel1,tel2,tel3) " + 
+				" VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+			
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, client.getId());
+			pstmt.setString(2, client.getPw());
+			pstmt.setString(3, client.getName());
+			pstmt.setString(4, client.getEmail());
+			pstmt.setString(5, client.getEmail2());
+			pstmt.setInt(6, client.getTel1());
+			pstmt.setInt(7, client.getTel2());
+			pstmt.setInt(8, client.getTel3());
+			
+			row = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			log.info("ClientWrite() 에러 발생 ");
+			e.printStackTrace();
+		}finally {
+			try {
+				pstmt.close();
+				conn.close();
+			}catch(Exception e) {}
+		}
 		return row;
 	}
+	
 	//자유게시판 목록리스트
 	public List<BoardVO> BoardList(){
 		List<BoardVO> Blist = new ArrayList<BoardVO>();
@@ -60,3 +85,5 @@ public class ProjectDAO {//여기서 DB 작업 하겠습니다
 		return Qlist;
 	}
 }
+
+
