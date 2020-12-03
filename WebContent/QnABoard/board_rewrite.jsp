@@ -20,6 +20,7 @@
 	<input type="text" name="subject" class="form-control mt-4 mb-2"
 		readonly value="${title}"
 	>
+	<input type="hidden" name="idx" value="${idx}">
 	<div class="form-group">
 		<textarea class="form-control" rows="10" name="content"
 			placeholder="내용을 입력해주세요" required

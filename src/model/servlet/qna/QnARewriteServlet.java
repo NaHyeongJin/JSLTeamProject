@@ -33,6 +33,7 @@ public class QnARewriteServlet extends HttpServlet {
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		request.setAttribute("title", manager.getTitle(idx));
+		request.setAttribute("idx", idx);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_rewrite.jsp");
 		dispatcher.forward(request, response);
@@ -42,13 +43,13 @@ public class QnARewriteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 필요한거 idx, 제목, 내용
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
 		manager.qnaRewrite(idx, subject, content);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_rewrite_pro.jsp");
 		dispatcher.forward(request, response);
 	}
 

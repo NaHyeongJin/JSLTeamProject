@@ -187,7 +187,7 @@ public class QnABoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String temp = (isAnswer) ? "Q_A" : "Q_CONTENT";
+		String temp = (isAnswer) ? "Q_A" : "Q_CONTENTS";
 		String sql = "UPDATE QNA SET Q_SUBJECT = ?, " + temp + " = ? where q_idx=?";
 		try {
 			conn = DBUtil.getConnection();
@@ -211,7 +211,7 @@ public class QnABoardDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 
-		String temp = (isAnswer) ? "Q_A" : "Q_CONTENT";
+		String temp = (isAnswer) ? "Q_CONTENTS" : "Q_A";
 		String sql = "DELETE FROM QNA WHERE q_idx=? and " + temp + " is null";
 		try {
 			conn = DBUtil.getConnection();
@@ -235,7 +235,7 @@ public class QnABoardDAO {
 		ResultSet rs = null;
 		
 		String answer = "";
-		String sql = "select q_subject from qna where idx=?";
+		String sql = "select q_subject from qna where q_idx=?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);

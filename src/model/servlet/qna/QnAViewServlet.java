@@ -37,6 +37,7 @@ public class QnAViewServlet extends HttpServlet {
 		
 		manager.qnaHits(idx, isAnswer);
 		request.setAttribute("vo", manager.qnaView(idx, isAnswer));
+		request.setAttribute("isAnswer", request.getParameter("isAnswer"));
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_view.jsp");
 		dispatcher.forward(request, response);

@@ -35,7 +35,7 @@ public class QnADeleteServlet extends HttpServlet {
 		Boolean isAnswer = (request.getParameter("isAnswer").equals("true")) ? true : false;
 		manager.deleteQna(idx, isAnswer);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_delete_pro.jsp");
 		dispatcher.forward(request, response);
 	}
 
