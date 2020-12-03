@@ -75,6 +75,61 @@ public class QnABoardDAO {
 		return qlist;
 	}
 	
+	// option 1 == 제목검색
+	// 나머지 작성자검색
+	public List<QnaVO> qnaList(int pageIndex, int option, String search) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String temp = (option == 1) ? "q_subject" : "q_id";
+		List<QnaVO> qlist = new ArrayList<QnaVO>();
+
+		int first = (pageIndex - 1) * 10 + 1;
+		if(isAnswer(first)) {
+			first++;
+		}
+		int end = first + 9;
+		if(isAnswer(end + 1)) {
+			end++;
+		}
+		String sql = "SELECT *\r\n" + 
+				"FROM (SELECT ROWNUM AS RNUM, A.* FROM (SELECT * FROM QNA ORDER BY Q_IDX desc, Q_REGDATE) A where " + temp + " like '%" + search + "%')\r\n" + 
+				"where rnum >= ? and rnum <= ?";
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  first);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				QnaVO vo = new QnaVO();
+				vo.setA_cnt(rs.getInt("a_cnt"));
+				vo.setId(rs.getString("q_id"));
+				vo.setGrade(rs.getString("q_grade"));
+				vo.setPw(rs.getString("q_pw"));
+				vo.setQ_a(rs.getString("q_a"));
+				vo.setQ_cnt(rs.getInt("q_cnt"));
+				vo.setQ_contents(rs.getString("q_contents"));
+				vo.setQ_idx(rs.getInt("q_idx"));
+				vo.setQ_regdate(rs.getString("q_regdate"));
+				vo.setQ_subject(rs.getString("q_subject"));
+				qlist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (Exception e2) {
+			}
+		}
+
+		return qlist;
+	}
+	
 	private Boolean isAnswer(int check) {
 		Boolean bool = false;
 		Connection conn = null;

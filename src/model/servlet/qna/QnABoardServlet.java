@@ -33,15 +33,22 @@ public class QnABoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		QnABoardDAO manager = QnABoardDAO.getInstance();
 		int pageIndex = Integer.parseInt(request.getParameter("page"));
+		if(pageIndex == 0) pageIndex++;
 		List<QnaVO> list = manager.qnaList(pageIndex);
+		if (list.isEmpty()) {
+			pageIndex--;
+			list = manager.qnaList(pageIndex);
+		}
 		int cnt = manager.totList() - 1;
 		
 		if(list.size() > 10)
 			cnt = (list.get(10).getId().contains("admin")) ? cnt - 1 : cnt;
 		cnt = (int) (cnt / 10) + 1;
 		
+		request.setAttribute("page", pageIndex);
 		request.setAttribute("list", list);
 		request.setAttribute("pageIndex", cnt);
 		request.setAttribute("newIdx", 0);
@@ -55,8 +62,31 @@ public class QnABoardServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		QnABoardDAO manager = QnABoardDAO.getInstance();
+		int pageIndex = Integer.parseInt(request.getParameter("page"));
+		int option = 1;
+		if (request.getParameter("inputSearch") == null) {
+			doGet(request, response);
+			return;
+		} else {
+			option = request.getParameter("inputSearch").equals("제목") ? 1 : 2;
+		}
+		String search = request.getParameter("search");
+		List<QnaVO> list = manager.qnaList(pageIndex, option, search);
+		int cnt = manager.totList() - 1;
+		
+		if(list.size() > 10)
+			cnt = (list.get(10).getId().contains("admin")) ? cnt - 1 : cnt;
+		cnt = (int) (cnt / 10) + 1;
+		
+		request.setAttribute("list", list);
+		request.setAttribute("pageIndex", cnt);
+		request.setAttribute("newIdx", 0);
+		request.setAttribute("id", "");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("QnABoard/board_list.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

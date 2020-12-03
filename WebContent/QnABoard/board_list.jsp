@@ -16,6 +16,9 @@
 <script type="text/javascript" src="resource/js/bootstrap.js"></script>
 <link rel="stylesheet" href="resource/css/bootstrap.css">
 <script>
+function send() {
+	document.search.submit();
+}
 </script>
 </head>
 <body>
@@ -73,13 +76,13 @@
 	</table>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#"
+			<li class="page-item"><a class="page-link" href="qna_board?page=${page-1}"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
 			<c:forEach var="a" begin="1" end="${pageIndex }" step="1">
 				<li class="page-item"><a class="page-link" href="qna_board?page=${a}">${a}</a></li>
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="#"
+			<li class="page-item"><a class="page-link" href="qna_board?page=${page+1}"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
@@ -89,16 +92,15 @@
 			<button type="button" class="btn btn-secondary mb-3"
 				onClick="location.href='qna_write'">새글쓰기</button>
 		</form>
-		<form class="form-inline">
-			<select id="inputSearch" class="form-control">
+		<form name = "search" class="form-inline" action="qna_board?page=1" method="post">
+			<select name="inputSearch" class="form-control">
 				<option selected>제목</option>
-				<option>내용</option>
 				<option>작성자</option>
 			</select>
-			<input class="form-control mr-sm-2" type="search"
+			<input class="form-control mr-sm-2" type="search" name="search"
 				placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onClick="location.href='#'">Search</button>
+				onClick="send()">Search</button>
 		</form>
 	</nav>
 	<script type="text/javascript" src="resource/js/bootstrap.js"></script>
