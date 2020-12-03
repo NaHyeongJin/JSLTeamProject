@@ -16,7 +16,7 @@ public class QnaVO {//질문과답변 게시판
 	}
 	public void setGrade(String grade) {
 		this.grade = grade;
-	}
+  }
 	public int getQ_cnt() {
 		return q_cnt;
 	}
