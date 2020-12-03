@@ -8,8 +8,8 @@
  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>MAIN</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="resource/js/bootstrap.js"></script>
-<link rel="stylesheet" href="resource/css/bootstrap.css">
+<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
+<link rel="stylesheet" href="/resource/css/bootstrap.css">
 <script>
 
 </script>
@@ -18,9 +18,9 @@
 	<div >
 			<section>
 				<div class="nav navbar-nav navbar-right">
-					<h2 align="center" class="dropdown"> JSL TeamProject -
-               ${loginedMemberId} ${Grade == 'A' ? '관리자' : (Grade == 'B' ? '일반회원' : '비회원')}
-               </h2><br>
+					<h2 align="center" class="dropdown"> JSL TeamProject - Method
+					${loginId} ${grade eq 'a' ? '관리자' : (grade eq 'b' ? '일반회원' : '비회원')}
+					</h2><br>
 				         국가직무능력표준(NCS:National Competency Standards)로
 				         <br> 설계된 교육훈련과정을 이수하고 내.외부평가를
         	 		  		    거쳐 취득하는 국가기술자격입니다<br> 
@@ -31,7 +31,7 @@
 			</section>
 	</div>
 	
-<script type="text/javascript" src="resource/js/bootstrap.js"></script>
+<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </body>
-<%@ include file="/include/footer.jsp" %>    
+<%@ include file="/include/footer.jsp" %> 	
 </html>

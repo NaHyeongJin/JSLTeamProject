@@ -3,6 +3,7 @@ package model.vo;
 public class QnaVO {//질문과답변 게시판
 	private String id;//질문과답변은 모든회원 글쓰기 가능 글쓴 회원의 id
 	private String pw;//글을쓰는사람은 비밀번호를등록하여 비밀번호를 글확인
+	private String grade;//글쓴사람등급
 	private String q_subject;//질문 제목
 	private String q_contents;//질문 내용
 	private String q_regdate;//자유게시판 글등록날짜
@@ -10,13 +11,6 @@ public class QnaVO {//질문과답변 게시판
 	private int q_idx;//글 번호
 	private int a_cnt;//글 조회수
 	private int q_cnt;//답글 조회수
-	private String grade;
-	public String getGrade() {
-		return grade;
-	}
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
 	public int getQ_cnt() {
 		return q_cnt;
 	}
@@ -34,6 +28,12 @@ public class QnaVO {//질문과답변 게시판
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 	public String getQ_subject() {
 		return q_subject;
