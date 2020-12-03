@@ -50,7 +50,7 @@ public class QnAWriteServlet extends HttpServlet {
 		// 로그인 된 상태인지 확인하는 bool값 호출하고
 		HttpSession session = request.getSession(false);
 		request.setCharacterEncoding("UTF-8");
-		Boolean isLoginned = (session.isNew()) ? true : false;
+		Boolean isLoginned = !(session.getAttribute("loginedMemberId") == null);
 		String id = (isLoginned) ? (String) session.getAttribute("loginedMemberId") : (String) request.getParameter("qnaId");
 		String pass = (isLoginned) ? "" : (String) request.getParameter("qnaPass");
 		String grade = (isLoginned) ? (String) session.getAttribute("Grade") : "C";
