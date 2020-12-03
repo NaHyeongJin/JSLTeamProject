@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item active"><a class="nav-link"
-						href="/index.jsp">홈 <span class="sr-only">(current)</span>
+						href="index">홈 <span class="sr-only">(current)</span>
 					</a></li>
 
 					<!-- 관리자 로그인  -->
@@ -60,11 +60,10 @@
 
 				<h3 class="my-4 text-center">Category</h3>
 				<div class="list-group mb-4">
-					<a
-						class="list-group-item list-group-item-info text-center font-weight-bold"
-						href="index">자유게시판</a> <a href="qna_board"
-						class="list-group-item list-group-item-action text-center font-weight-bold">질문과
-						답변</a> <a href="/room"
+					<a class="list-group-item list-group-item-info text-center font-weight-bold" href="index">자유게시판</a>
+					<a href="qna_board?page=1"
+						class="list-group-item list-group-item-action text-center font-weight-bold">질문과 답변</a>
+					<a href="index"
 						class="list-group-item list-group-item-action text-center font-weight-bold">자료실(다운로드)</a>
 					<a href="index"
 						class="list-group-item list-group-item-action text-center font-weight-bold">쇼핑몰</a>

@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/LoginOut/login.jsp");		
+		RequestDispatcher rd = request.getRequestDispatcher("/Login/login.jsp");		
 		rd.forward(request, response);
 		
 	}
