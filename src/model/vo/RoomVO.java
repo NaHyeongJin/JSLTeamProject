@@ -2,6 +2,7 @@ package model.vo;
 
 public class RoomVO {//자료실
 	private String r_id;//자료실 등록한 회원의 id
+	private String r_pass;//자료실 등록 비밀번호
 	private String r_grade;//글쓴 사람의 등급
 	private String r_subject;//자료실 제목
 	private String r_contents;//자료실 내용
@@ -17,6 +18,12 @@ public class RoomVO {//자료실
 	}
 	public String getR_grade() {
 		return r_grade;
+	}
+	public String getR_pass() {
+		return r_pass;
+	}
+	public void setR_pass(String r_pass) {
+		this.r_pass = r_pass;
 	}
 	public void setR_grade(String r_grade) {
 		this.r_grade = r_grade;

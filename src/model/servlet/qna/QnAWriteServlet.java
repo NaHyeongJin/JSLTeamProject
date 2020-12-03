@@ -48,9 +48,9 @@ public class QnAWriteServlet extends HttpServlet {
 		// 로그인 된 토큰 기반으로 저장하거나
 		// 비회원이면 아이디 비번 받아서 저장
 		// 로그인 된 상태인지 확인하는 bool값 호출하고
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
 		request.setCharacterEncoding("UTF-8");
-		Boolean isLoginned = session.getAttribute("loginedMemberId").equals(null) ? false : true;
+		Boolean isLoginned = (session == null) ? false : true;
 		String id = (isLoginned) ? (String) session.getAttribute("loginedMemberId") : (String) request.getParameter("qnaId");
 		String pass = (isLoginned) ? "" : (String) request.getParameter("qnaPass");
 		String grade = (isLoginned) ? (String) session.getAttribute("Grade") : "C";

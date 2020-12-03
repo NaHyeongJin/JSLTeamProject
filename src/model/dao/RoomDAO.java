@@ -203,15 +203,16 @@ public class RoomDAO {// 여기서 DB 작업 하겠습니다
 		// 리턴
 		int row = 0;
 		// 쿼리
-		String sql = "insert into room(r_idx,r_subject,r_id,r_filename,r_contents) "
-				+ "values(tbl_room_seq_ridx.nextval,?,?,?,?)";
+		String sql = "insert into room(r_idx,r_id,r_pass,r_subject,r_contents,r_filename) "
+				+ "values(tbl_room_seq_ridx.nextval,?,?,?,?,?)";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, vo.getR_subject());
-			pstmt.setString(2, vo.getR_id());
-			pstmt.setString(3, vo.getR_filename());
+			pstmt.setString(1, vo.getR_id());
+			pstmt.setString(2, vo.getR_pass());
+			pstmt.setString(3, vo.getR_subject());
 			pstmt.setString(4, vo.getR_contents());
+			pstmt.setString(5, vo.getR_filename());
 
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -381,18 +382,18 @@ public class RoomDAO {// 여기서 DB 작업 하겠습니다
 	}
 
 	// 삭제(delete)
-	public int RoomDelete(int idx, String r_id) {
+	public int RoomDelete(int idx, String r_pass) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		// 리턴타입
 		int row = 0;
 		// 쿼리
-		String sql = "delete from room where r_idx=? and r_id=?";
+		String sql = "delete from room where r_idx=? and r_pass=?";
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
-			pstmt.setString(2, r_id);
+			pstmt.setString(2, r_pass);
 
 			row = pstmt.executeUpdate();
 		} catch (Exception e) {

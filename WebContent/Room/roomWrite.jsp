@@ -20,9 +20,12 @@
 	<input type="text" name="r_subject" class="form-control mt-4 mb-2"
 		placeholder="제목을 입력해주세요." required
 	>
-	<c:if test = "${!isLoginned}">
+	<c:if test = "${loginedMemberId == null}">
 		<input type="text" name="r_id" class="form-control"
 			placeholder="아이디를 입력해주세요." required
+		>
+		<input type="password" name="r_pass" class="form-control mb-2"
+			placeholder="비밀번호를 입력해주세요." required
 		>
 	</c:if>
 	<div class="form-group">

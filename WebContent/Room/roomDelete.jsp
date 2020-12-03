@@ -5,9 +5,9 @@
 <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 <script>
 	function send(){
-		if(room.r_id.value==""){
+		if(room.r_pass.value==""){
 			alert("비번입력");
-			room.r_id.focus();
+			room.r_pass.focus();
 			return;
 		}
 		room.submit();
@@ -28,7 +28,7 @@
     글의 비밀번호를 입력해 주세요...</font></td></tr>
   <tr>
     <td valign="middle" height="40">
-    <font size="2" face="돋움">비밀번호 <input type="password" name="r_id" size="8"></font>
+    <font size="2" face="돋움">비밀번호 <input type="password" name="r_pass" size="8"></font>
     <input type="button" value="삭제" onClick="send()">
     <input type="button" value="닫기" onClick="self.close()"> </td></tr>
   </table>

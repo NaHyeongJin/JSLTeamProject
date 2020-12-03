@@ -50,11 +50,6 @@ function room_del(){
 	</div>
 </div>
 <nav class="navbar navbar-expand-lg">
-	<c:if test="${!isAnswer && (fn:contains(cookie.id, 'admin'))}">
-  		<form action="답글쓰러가깅ㅇㅇㅇㅇ" method="post">
-			<button type="submit" class="btn btn-secondary mr-sm-2">답글쓰기</button>
-		</form>
-	</c:if>
 		<button class="btn btn-secondary mr-sm-2"
 		onClick="location.href='roommodify?r_idx=${vo.r_idx }'">수정하기</button>
 		<button type="submit" class="btn btn-secondary mr-sm-2"

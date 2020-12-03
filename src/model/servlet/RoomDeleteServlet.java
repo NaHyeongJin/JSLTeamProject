@@ -44,12 +44,12 @@ public class RoomDeleteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int r_idx = Integer.parseInt(request.getParameter("r_idx"));
-		String r_id = request.getParameter("r_id");
+		String r_pass = request.getParameter("r_pass");
 		
 		RoomDAO dao = RoomDAO.getInstance();
 		String r_filename = dao.SearchFile(r_idx);
 		
-		int row = dao.RoomDelete(r_idx, r_id);
+		int row = dao.RoomDelete(r_idx, r_pass);
 		if(row==1) {
 			//파일 삭제
 			ServletContext context = getServletContext();

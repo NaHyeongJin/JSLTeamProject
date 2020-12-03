@@ -65,9 +65,12 @@ public class RoomListServlet extends HttpServlet {
 		}
 		if(request.getParameter("page") != null) {
 	         nowpage = Integer.parseInt(request.getParameter("page"));
+	         if(nowpage==0) {
+	        	 nowpage++;
+	         }
 	    }
 		if(nowpage>totpage) {
-			nowpage=totpage;
+			nowpage--;
 		}
 		int startpage = (nowpage-1)*maxlist+1;
 	    int endpage = nowpage*maxlist;
@@ -82,18 +85,18 @@ public class RoomListServlet extends HttpServlet {
 
 		
 		//페이지 처리
-		String pageSkip = "";
-		if(key.equals("")) {
-			pageSkip = PageIndex.pageList(nowpage, totpage, url, "");
-		}else {
-			pageSkip = PageIndex.pageListHan(nowpage, totpage, url, query, key);
-		}
+//		String pageSkip = "";
+//		if(key.equals("")) {
+//			pageSkip = PageIndex.pageList(nowpage, totpage, url, "");
+//		}else {
+//			pageSkip = PageIndex.pageListHan(nowpage, totpage, url, query, key);
+//		}
 		request.setAttribute("totcount", totcount);
 		request.setAttribute("page", nowpage);
 		request.setAttribute("totpage", totpage);
 		request.setAttribute("listcount", listcount);
 		request.setAttribute("list", list);
-		request.setAttribute("pageSkip", pageSkip);
+		//request.setAttribute("pageSkip", pageSkip);
 		request.setAttribute("query", query);
 		request.setAttribute("key", key);
 		request.setAttribute("list", list);

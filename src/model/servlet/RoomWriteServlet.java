@@ -55,6 +55,7 @@ public class RoomWriteServlet extends HttpServlet {
 		MultipartRequest multi = 
 				new MultipartRequest(request, path, sizeLimit, encType, new DefaultFileRenamePolicy());
 		vo.setR_id(multi.getParameter("r_id"));
+		vo.setR_pass(multi.getParameter("r_pass"));
 		vo.setR_subject(multi.getParameter("r_subject"));
 		vo.setR_contents(multi.getParameter("r_contents"));
 		vo.setR_filename(multi.getFilesystemName("r_filename")); //<<<★☆★☆이샛기 중요☆★☆★

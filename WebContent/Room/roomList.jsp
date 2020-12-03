@@ -39,15 +39,8 @@
 							<td style="width: 10%" class="text-center">${room.r_idx }</td>
 							<td style="width: 50%">
 							<a class="text-reset" href="roomview?r_idx=${room.r_idx }">${room.r_subject }</a></td>
-							<%-- <c:choose>
-							<c:when test="${room.r_id.equlas(admin)}">
-							<td style="width: 10%" class="text-center">관리자</td>
-							</c:when>
-							<c:otherwise> --%>
-							<td style="width: 10%" class="text-center">${room.r_id }</td>
-							<%-- </c:otherwise>
-							</c:choose> --%>
-							<td style="width: 20%" class="text-center">${room.r_regdate }</td>
+							<td style="width: 10%" class="text-center">${(fn:contains(room.r_id, 'admin')) ? '관리자' : room.r_id }</td>
+							<td style="width: 20%" class="text-center">${room.r_regdate.substring(0,10) }</td>
 							<td style="width: 10%" class="text-center">${room.r_cnt }</td>
 						</tr>
 			</c:forEach>
@@ -55,34 +48,35 @@
 	</table>
 	<nav aria-label="Page navigation example">
 		<ul class="pagination">
-			<li class="page-item"><a class="page-link" href="#"
+			<li class="page-item"><a class="page-link" href="room?page=${page-1}"
 				aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 			</a></li>
-			<c:forEach var="a" begin="1" end="${pageIndex }" step="1">
-				<li class="page-item"><a class="page-link" href="#">${a}</a></li>
+			<c:forEach var="a" begin="1" end="${totpage }" step="1">
+				<li class="page-item"><a class="page-link" href="room?page=${a}">${a}</a></li>
 			</c:forEach>
-			<li class="page-item"><a class="page-link" href="#"
+			<li class="page-item"><a class="page-link" href="room?page=${page+1}"
 				aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 			</a></li>
 		</ul>
 	</nav>
-	   <nav class="navbar navbar-light bg-light">
-      <form action="/board/boardWriter" method="post">
-         <button type="button" class="btn btn-secondary mb-3"
-            onClick="location.href='Room/roomWrite.jsp'">새글쓰기</button>
-      </form>
-      <form class="form-inline">
-         <select id="inputSearch" class="form-control">
-            <option selected>제목</option>
-            <option>내용</option>
-            <option>작성자</option>
-         </select>
-         <input class="form-control mr-sm-2" type="search"
-            placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success my-2 my-sm-0" type="button"
-            onClick="location.href='#'">Search</button>
-      </form>
-   </nav>
+	<nav class="navbar navbar-light bg-light">
+		<%-- <c:if test="${!fn:contains(loginedMemberId, 'admin')}"> --%>
+			<form>
+				<button type="button" class="btn btn-secondary mb-3"
+					onClick="location.href='Room/roomWrite.jsp'">새글쓰기</button>
+			</form>
+		<%-- </c:if> --%>
+		<form name = "search" class="form-inline" action="qna_board?page=1" method="post">
+			<select name="inputSearch" class="form-control">
+				<option selected>제목</option>
+				<option>작성자</option>
+			</select>
+			<input class="form-control mr-sm-2" type="search" name="search"
+				placeholder="Search" aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="button"
+				onClick="send()">Search</button>
+		</form>
+	</nav>
 	<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </body>
 <%@ include file="/include/footer.jsp"%>
