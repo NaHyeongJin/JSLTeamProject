@@ -63,7 +63,7 @@
 					<a class="list-group-item list-group-item-info text-center font-weight-bold" href="index">자유게시판</a>
 					<a href="qna_board?page=1"
 						class="list-group-item list-group-item-action text-center font-weight-bold">질문과 답변</a>
-					<a href="index"
+					<a href="/room"
 						class="list-group-item list-group-item-action text-center font-weight-bold">자료실(다운로드)</a>
 					<a href="index"
 						class="list-group-item list-group-item-action text-center font-weight-bold">쇼핑몰</a>
