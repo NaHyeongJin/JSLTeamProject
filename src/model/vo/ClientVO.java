@@ -1,4 +1,4 @@
-package model.vo;
+package vo;
 
 public class ClientVO {
 	private String grade;//회원 등급 A=관리자 B=일반회원 C=비회원으로 분류
@@ -76,5 +76,4 @@ public class ClientVO {
 	public void setTel3(int tel3) {
 		this.tel3 = tel3;
 	}
-	
 }
